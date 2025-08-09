@@ -1,0 +1,22 @@
+
+{
+	"songs": [
+		["Perseverance", "noxdd", [255, 255, 255], "idk"]
+	],
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "polus",
+	
+	"storyName": "Polus Problems",
+        "difficulties": "Hard",
+	"weekBefore": "tutorial",
+	"weekName": "week1",
+	"startUnlocked": true,
+
+	"hideStoryMode": true,
+	"hideFreeplay": false
+}
+

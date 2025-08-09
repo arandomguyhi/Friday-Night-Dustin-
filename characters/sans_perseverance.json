@@ -1,0 +1,199 @@
+{
+	"animations": [
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "idle"
+		},
+		{
+			"offsets": [40, 4.55],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "left"
+		},
+		{
+			"offsets": [0, -15.45],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "down"
+		},
+		{
+			"offsets": [-5.5, 1.8],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "up"
+		},
+		{
+			"offsets": [-7.27, -0.9],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "right"
+		},
+		{
+			"offsets": [0, -0.9],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle-mad",
+			"loop": false,
+			"name": "madidle"
+		},
+		{
+			"offsets": [-80, -0.91],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT-mad",
+			"loop": false,
+			"name": "madright"
+		},
+		{
+			"offsets": [40, -45.45],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN-mad",
+			"loop": false,
+			"name": "maddown"
+		},
+		{
+			"offsets": [43.64, 16.36],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP-mad",
+			"loop": false,
+			"name": "madup"
+		},
+		{
+			"offsets": [97.27, -22.73],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT-mad",
+			"loop": false,
+			"name": "madleft"
+		},
+		{
+			"offsets": [54.55, -2.73],
+			"indices": [],
+			"fps": 24,
+			"anim": "voiceline",
+			"loop": false,
+			"name": "voiceline"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle-racist",
+			"loop": false,
+			"name": "racistidle"
+		},
+		{
+			"offsets": [45.45, 17.27],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP-racist",
+			"loop": false,
+			"name": "racistup"
+		},
+		{
+			"offsets": [-4.55, 6.36],
+			"indices": [],
+			"fps": 24,
+			"anim": "red_eye",
+			"loop": false,
+			"name": "red_eye"
+		},
+		{
+			"offsets": [-4.55, 6.36],
+			"indices": [],
+			"fps": 24,
+			"anim": "red_eye-loop",
+			"loop": true,
+			"name": "red_eye0011"
+		},
+		{
+			"offsets": [42.73, -41.82],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN-racist",
+			"loop": false,
+			"name": "racistdown"
+		},
+		{
+			"offsets": [83.64, -0.91],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT-racist",
+			"loop": false,
+			"name": "racistright"
+		},
+		{
+			"offsets": [96.36, -20.91],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT-racist",
+			"loop": false,
+			"name": "racistleft"
+		},
+		{
+			"offsets": [-1, 4],
+			"indices": [],
+			"fps": 24,
+			"anim": "eye",
+			"loop": false,
+			"name": "eye"
+		},
+		{
+			"offsets": [-1, 4],
+			"indices": [],
+			"fps": 24,
+			"anim": "eye-loop",
+			"loop": false,
+			"name": "eye0154"
+		},
+		{
+			"offsets": [54.55, -2.73],
+			"indices": [],
+			"fps": 24,
+			"anim": "madvoiceline",
+			"loop": false,
+			"name": "voiceline"
+		},
+		{
+			"offsets": [54.46, -2.73],
+			"indices": [],
+			"fps": 24,
+			"anim": "madvoiceline-loop",
+			"loop": true,
+			"name": "voiceline0076"
+		},
+		{
+			"offsets": [1, 4],
+			"indices": [],
+			"fps": 24,
+			"anim": "eyedle",
+			"loop": true,
+			"name": "eye0000"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/perseverance/sans",
+	"position": [0, 170],
+	"healthicon": "perseverance-sans",
+	"flip_x": false,
+	"healthbar_colors": [57, 49, 119],
+	"camera_position": [0, -50],
+	"sing_duration": 4,
+	"scale": 1.1,
+	"_editor_isPlayer": false
+}

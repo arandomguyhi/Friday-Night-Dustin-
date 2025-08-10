@@ -58,6 +58,8 @@ function onCreate()
     addLuaSprite('BG4')
 
     if shadersEnabled then
+        runHaxeCode("camGame.filters = []; camHUD.filters = [];") -- for some reason wasn't workin' with setProperty
+
         initLuaShader('bloom_new')
         makeLuaSprite('bloom_new') setSpriteShader('bloom_new', 'bloom_new')
         setShaderFloat('bloom_new', 'size', 10) setShaderFloat('bloom_new', 'brightness', 1.4)
@@ -95,6 +97,7 @@ function onCreate()
         setProperty(cam..'.bgColor', 0x000000)
         callMethodFromClass('flixel.FlxG', 'cameras.add', {instanceArg(cam), cam == 'camGame'})
     end
+    runHaxeCode("getVar('camCharacters').filters = []; getVar('camForeground').filters = [];")
 
     if shadersEnabled then
         initLuaShader('coloredVignette')
@@ -106,10 +109,12 @@ function onCreate()
         initLuaShader('chromaticWarp')
         makeLuaSprite('chromWarp') setSpriteShader('chromWarp', 'chromaticWarp')
         setShaderFloat('chromWarp', 'distortion', .3)
+        addShader('camGame', 'chromWarp')
 
         initLuaShader('waterDistortion')
         makeLuaSprite('water') setSpriteShader('water', 'waterDistortion')
         setShaderFloat('water', 'strength', .0)
+        addShader('camGame', 'water')
 
         initLuaShader('impact_frames')
         makeLuaSprite('impact') setSpriteShader('impact', 'impact_frames')
@@ -119,20 +124,27 @@ function onCreate()
         makeLuaSprite('glitching') setSpriteShader('glitching', 'glitching2')
         setShaderFloat('glitching', 'time', 0) setShaderFloat('glitching', 'glitchAmount', 0)
 
-        runHaxeCode([[
-            game.getLuaObject('BG4').camera = getVar('camForeground');
-            /*getVar('camCharacters').setFilters([
-                new ShaderFilter(game.getLuaObject('impact').shader),
-                new ShaderFilter(game.getLuaObject('glitching').shader),
-                new ShaderFilter(game.getLuaObject('screenVignette2').shader),
-                new ShaderFilter(game.getLuaObject('bloom_new').shader),
-                new ShaderFilter(game.getLuaObject('gradientShader').shader),
-                new ShaderFilter(game.getLuaObject('fogShader').shader)
-            ]);*/
-            camGame.setFilters([new ShaderFilter(game.getLuaObject('chromWarp').shader), new ShaderFilter(game.getLuaObject('water').shader)]);
-        ]])
+        addShader('camCharacters', 'impact')
+        addShader('camCharacters', 'glitching')
+        addShader('camCharacters', 'screenVignette2')
+        addShader('camCharacters', 'bloom_new')
+        addShader('camCharacters', 'gradientShader')
+        addShader('camCharacters', 'fogShader')
+
+        runHaxeCode("game.getLuaObject('BG4').camera = getVar('camForeground');")
         setProperty('BG4.color', 0x1B1B1B)
     end
+end
+
+function onCreatePost()
+    if shadersEnabled then
+        addShader('camHUD', 'water')
+    end
+
+    runHaxeCode([[
+        for (char in [boyfriend, dad, gf])
+            char.camera = getVar('camCharacters');
+    ]])
 end
 
 local __timer = 0
@@ -154,10 +166,17 @@ function onUpdate(elapsed)
     setProperty('gf.x', 1397 + math.sin(__timer)*24)
     setProperty('gf.y', 850 + (math.sin(__timer*2)/2)*(12))
 
+    setProperty('gf.alpha', (0.7 + math.sin(__timer)*.04)*gfAlpha)
+
     for x, cam in pairs({'camCharacters', 'camForeground'}) do
         setProperty(cam..'.scroll.x', getProperty('camGame.scroll.x'))
         setProperty(cam..'.scroll.y', getProperty('camGame.scroll.y'))
         setProperty(cam..'.zoom', getProperty('camGame.zoom'))
         setProperty(cam..'.angle', getProperty('camGame.angle'))
     end
+end
+
+function addShader(cam, shaderN)
+    createInstance(shaderN..'Filter'..cam, 'openfl.filters.ShaderFilter', {instanceArg(shaderN..'.shader')})
+    callMethod(cam..'.filters.push', {instanceArg(shaderN..'Filter'..cam)})
 end

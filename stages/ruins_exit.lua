@@ -134,6 +134,11 @@ function onCreate()
         runHaxeCode("game.getLuaObject('BG4').camera = getVar('camForeground');")
         setProperty('BG4.color', 0x1B1B1B)
     end
+
+    makeLuaSprite('blackOverlay', nil, -2000, -500)
+    makeGraphic('blackOverlay', 4000, 1500, '1b1b1b')
+    setScrollFactor('blackOverlay', 0, 0)
+    addLuaSprite('blackOverlay')
 end
 
 function onCreatePost()

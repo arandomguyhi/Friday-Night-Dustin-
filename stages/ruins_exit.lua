@@ -156,17 +156,19 @@ local __timer = 0
 local gfAlpha = 0
 function onUpdate(elapsed)
     __timer = __timer + elapsed
-    --if not getVar('cancelCamMove') then
-        setShaderFloat('fogShader', 'time', __timer)
-        setShaderFloat('water', 'time', __timer)
-        setShaderFloat('glitching', 'time', __timer)
-    --end
+    if shadersEnabled then
+        --if not getVar('cancelCamMove') then
+            setShaderFloat('fogShader', 'time', __timer)
+            setShaderFloat('water', 'time', __timer)
+            setShaderFloat('glitching', 'time', __timer)
+        --end
 
-    setShaderFloat('fogShader', 'cameraZoom', getProperty('camGame.zoom'))
-    setShaderFloatArray('fogShader', 'cameraPosition', {getProperty('camGame.scroll.x'), getProperty('camGame.scroll.y')})
+        setShaderFloat('fogShader', 'cameraZoom', getProperty('camGame.zoom'))
+        setShaderFloatArray('fogShader', 'cameraPosition', {getProperty('camGame.scroll.x'), getProperty('camGame.scroll.y')})
 
-    setShaderFloat('gradientShader', 'cameraZoom', getProperty('camGame.zoom'))
-    setShaderFloatArray('gradientShader', 'cameraPosition', {getProperty('camGame.scroll.x'), getProperty('camGame.scroll.y')})
+        setShaderFloat('gradientShader', 'cameraZoom', getProperty('camGame.zoom'))
+        setShaderFloatArray('gradientShader', 'cameraPosition', {getProperty('camGame.scroll.x'), getProperty('camGame.scroll.y')})
+    end
 
     setProperty('gf.x', 1397 + math.sin(__timer)*24)
     setProperty('gf.y', 850 + (math.sin(__timer*2)/2)*(12))

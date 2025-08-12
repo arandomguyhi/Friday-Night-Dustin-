@@ -1,13 +1,18 @@
 luaDebugMode = true
 
 runHaxeCode([[
+    import psychlua.FunkinLua;
+
     // why i've made this? idk, and don't ask why
     var defaultZoomTween:FlxTween; setVar('defaultZoomTween', defaultZoomTween);
     var bfZoomTween:FlxTween; setVar('bfZoomTween', bfZoomTween);
     var dadZoomTween:FlxTween; setVar('dadZoomTween', dadZoomTween);
     var gfZoomTween:FlxTween; setVar('gfZoomTween', gfZoomTween);
+
+    FunkinLua.customFunctions.set('addShader', function(cam:String, shaderName:String) {
+        parentLua.call('addShader', [cam, shaderName]);
+    });
 ]])
-addHaxeLibrary('LuaUtils', 'psychlua')
 
 function onEvent(name, value1, value2)
     if name == 'Change Stage Zoom' then
@@ -48,4 +53,9 @@ function onEvent(name, value1, value2)
             if params1[4] then setVar('strumLineGfZoom', params2[1]) end
         end
     end
+end
+
+function addShader(cam, shaderN)
+    createInstance(shaderN..'Filter'..cam, 'openfl.filters.ShaderFilter', {instanceArg(shaderN..'.shader')})
+    callMethod(cam..'.filters.push', {instanceArg(shaderN..'Filter'..cam)})
 end

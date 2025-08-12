@@ -2,6 +2,7 @@ luaDebugMode = true
 
 runHaxeCode([[
     import psychlua.FunkinLua;
+    import psychlua.LuaUtils;
 
     // why i've made this? idk, and don't ask why
     var defaultZoomTween:FlxTween; setVar('defaultZoomTween', defaultZoomTween);

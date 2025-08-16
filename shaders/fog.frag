@@ -41,7 +41,7 @@ float noise(vec2 st) {
 float fractal_brownian_motion(vec2 coord) {
     float value = 0.0;
     float scale = 0.5;
-    for (int i = 0; i < OCTAVES; i++) {
+    for (int i = 0; i < float(OCTAVES); i++) {
         value += noise(coord) * scale;
         coord *= 2.0;
         scale *= 0.5;
@@ -79,19 +79,19 @@ void main()
         vec3 effect = fogEffect * vec3(gradient * fogAmount, gradient * fogAmount, gradient * fogAmount);
         col.rgb += effect;
 
-        if (col.a == 0 && (effect.r > 0. || effect.g > 0. || effect.b > 0.))
+        if (col.a == 0.0 && (effect.r > 0. || effect.g > 0. || effect.b > 0.))
 		    col.a = brightness(effect);
     }
 
-    if (worldCoord.y <= applyY+FEATHER && worldCoord.y >= applyY) {
-        float dist = (applyY+FEATHER) - worldCoord.y;
-        float gradient = (dist / FEATHER);
+    if (worldCoord.y <= applyY + float(FEATHER) && worldCoord.y >= applyY) {
+        float dist = (applyY + float(FEATHER)) - worldCoord.y;
+        float gradient = (dist / float(FEATHER));
 
         vec3 fogEffect = mix(BG, FOG_COLOR, fogAmount * gradient);
         vec3 effect = fogEffect * vec3(gradient * fogAmount, gradient * fogAmount, gradient * fogAmount);
         col.rgb += effect;
 
-        if (col.a == 0 && (effect.r > 0. || effect.g > 0. || effect.b > 0.))
+        if (col.a == 0.0 && (effect.r > 0. || effect.g > 0. || effect.b > 0.))
 		    col.a = brightness(effect);
     }
     

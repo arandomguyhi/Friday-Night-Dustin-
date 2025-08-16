@@ -12,7 +12,7 @@ void main()
     uv -= center;
 
     vec4 color = flixel_texture2D(bitmap, openfl_TextureCoordv);
-    if (blur <= 0) {
+    if (blur <= 0.0) {
         gl_FragColor = color;
         return;
     }
@@ -20,7 +20,7 @@ void main()
     float precompute = blur * (1.0 / float(nsamples - 1));
     for(int i = 1; i < nsamples; i++) {
         float scale = 1.0 + (float(i)* precompute);
-        color += flixel_texture2D(bitmap, uv * scale + center);
+        color += texture2D(bitmap, uv * scale + center);
     }
     color /= float(nsamples);
     

@@ -10,6 +10,9 @@ runHaxeCode([[
     var dadZoomTween:FlxTween; setVar('dadZoomTween', dadZoomTween);
     var gfZoomTween:FlxTween; setVar('gfZoomTween', gfZoomTween);
 
+    game.camGame.filters = [];
+    game.camHUD.filters = [];
+
     FunkinLua.customFunctions.set('addShader', function(cam:String, shaderName:String) {
         parentLua.call('addShader', [cam, shaderName]);
     });
@@ -20,27 +23,27 @@ function onEvent(name, value1, value2)
         local params1 = stringSplit(value1, ',')
         local params2 = stringSplit(value2, ',')
 
-        if params1[5] then
+        if params1[5] == 'true' then
             local flxease = params2[3]..(params2[3] == "linear" and "" or params2[4])
-            if params1[1] then debugPrint('default')
+            if params1[1] == 'true' then
                 cancelTween('defaultZoomTween')
                 startTween('defaultZoomTween', 'game', {defaultCamZoom = params2[1]}, ((crochet / 4) / 1000) * params2[2], {ease = tostring(flxease)})
             end
-            if params1[2] then
+            if params1[2] == 'true' then
                 runHaxeCode([[
                     if (getVar('bfZoomTween') != null) getVar('bfZoomTween').cancel();
                     setVar('bfZoomTween', FlxTween.num(getVar('strumLineBfZoom'), ]]..params2[1]..[[, ((Conductor.crochet / 4) / 1000) * ]]..params2[2]..[[, 
                     {ease: LuaUtils.getTweenEaseByString(']]..flxease..[[')}, (val:Float) -> {setVar('strumLineBfZoom', val);}));
                 ]])
             end
-            if params1[3] then
+            if params1[3] == 'true' then
                 runHaxeCode([[
                     if (getVar('dadZoomTween') != null) getVar('dadZoomTween').cancel();
                     setVar('dadZoomTween', FlxTween.num(getVar('strumLineDadZoom'), ]]..params2[1]..[[, ((Conductor.crochet / 4) / 1000) * ]]..params2[2]..[[, 
                     {ease: LuaUtils.getTweenEaseByString(']]..flxease..[[')}, (val:Float) -> {setVar('strumLineDadZoom', val);}));
                 ]])
             end
-            if params1[4] then
+            if params1[4] == 'true' then
                 runHaxeCode([[
                     if (getVar('gfZoomTween') != null) getVar('gfZoomTween').cancel();
                     setVar('gfZoomTween', FlxTween.num(getVar('strumLineGfZoom'), ]]..params2[1]..[[, ((Conductor.crochet / 4) / 1000) * ]]..params2[2]..[[, 

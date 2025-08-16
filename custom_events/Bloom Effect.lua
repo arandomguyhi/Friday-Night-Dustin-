@@ -1,13 +1,13 @@
 if not shadersEnabled then return end
 
-luaDebugMode = true
+addHaxeLibrary('LuaUtils', 'psychlua')
 
 function onCreate()
     initLuaShader('bloom')
 
-    makeLuaSprite('bloom') setSpriteShader('bloom')
+    makeLuaSprite('bloom') setSpriteShader('bloom', 'bloom')
     setShaderFloat('bloom', 'size', 0) setShaderFloat('bloom', 'brightness', 1)
-    setShaderFloat('bloom', 'directions', 8) setShaderFloat('bloom', 'quality', 4)
+    setShaderFloat('bloom', 'directions', 8) setShaderInt('bloom', 'quality', 4)
     addShader('camGame', 'bloom')
     addShader('camHUD', 'bloom')
 end
@@ -17,7 +17,7 @@ setVar('curbloom', 1)
 function onEvent(name, value1, value2)
     local params1, params2 = stringSplit(value1, ','), stringSplit(value2, ',')
     if name == "Bloom Effect" then
-        if not params1[1] then
+        if params1[1] == 'false' then
             setBloom(params1[2])
         else
             local flxease = params2[1]..(params2[1] == 'linear' and '' or params2[2])

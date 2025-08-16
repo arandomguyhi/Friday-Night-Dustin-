@@ -133,6 +133,110 @@ function onStepHit()
             ]])
         end
     end
+
+    if curStep == 976 or curStep == 1104 then
+        if shadersEnabled then
+            runHaxeCode([[
+                FlxTween.num(.4, 0, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.cubeOut}, (val:Float) -> {
+                    game.callOnLuas('setShaderFloat', ['water', 'strength', val]); });
+                FlxTween.num(.5, 0, (Conductor.stepCrochet / 1000) * 12, {ease: FlxEase.cubeIn}, (val:Float) -> {
+                    game.callOnLuas('setShaderFloat', ['chromWarp', 'distortion', val]); });
+            ]])
+        end
+    end
+
+    if curStep == 1000 then
+        setVar('camMoveOffset', 0) setVar('camAngleOffset', 0)
+    end
+
+    if curStep == 1040 or curStep == 1167 then
+        setVar('camMoveOffset', 15) setVar('camAngleOffset', .3)
+    end
+
+    if curStep == 1136 then
+        setVar('camMoveOffset', 0) setVar('camAngleOffset', 0)
+
+        if shadersEnabled then
+            runHaxeCode([[
+                FlxTween.num(0, .3, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.cubeOut}, (val:Float) -> {
+                    game.callOnLuas('setShaderFloat', ['water', 'strength', val]); });
+                FlxTween.num(0, .3, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.cubeIn}, (val:Float) -> {
+                    game.callOnLuas('setShaderFloat', ['chromWarp', 'distortion', val]); });
+            ]])
+            removeShader('camHUD', 'water')
+
+            for i, char in pairs({'dad', 'boyfriend', 'gf'}) do
+                setShaderFloatArray(char, 'color', {.2, .2, .2})
+                setShaderFloat(char, 'minBrightness', .01)
+                runHaxeCode([[
+                    FlxTween.num(0, .1, (Conductor.stepCrochet / 1000) * 20, {ease: FlxEase.quintIn}, (val:Float) -> {
+                        game.callOnLuas('setShaderFloat', [']]..char..[[', 'ratio', val]); });
+                ]])
+            end
+        end
+    end
+
+    if curStep == 1168 then
+        if shadersEnabled then
+            for x, cam in pairs({'camGame', 'camCharacters', 'camForeground'}) do
+                addShader(cam, 'pixel') end
+            runHaxeCode([[
+                FlxTween.num(1, 16, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.circOut}, (val:Float) -> {
+                    game.callOnLuas('setShaderFloat', ['pixel', 'blockSize', val]); });
+            ]])
+        end
+
+        setVar('camAngleChars', false)
+        setProperty('camGame.angle', 0)
+        startTween('camAngleTween', 'camGame', {angle = -120}, (stepCrochet / 1000) * 15, {ease = 'circIn'})
+    end
+
+    if curStep == 1180 then
+        setProperty('camGame.visible', setProperty('camCharacters.visible', setProperty('camForeground.visible', setProperty('camHUD.visible', false))))
+    elseif curStep == 1182 then
+        setProperty('camGame.visible', setProperty('camCharacters.visible', setProperty('camForeground.visible', setProperty('camHUD.visible', true))))
+    end
+
+    if curStep == 1184 then
+        if shadersEnabled then
+            setShaderFloat('water', 'strength', 0) setShaderFloat('chromWarp', 'distortion', 0)
+            for x, char in pairs({'boyfriend', 'dad', 'gf'}) do
+                setShaderFloat(char, 'ratio', 0) end
+            runHaxeCode([[
+                FlxTween.num(32, 1, (Conductor.stepCrochet / 1000) * 24, {ease: FlxEase.circOut, onComplete: (_) -> {
+                    parentLua.call('pixelPart', []); }}, (val:Float) -> {
+                        game.callOnLuas('setShaderFloat', ['pixel', 'blockSize', val]);
+                });
+            ]])
+
+            removeShader('camForeground', 'screenVignette')
+            addShader('camHUD2', 'screenVignette')
+
+            removeShader('camGame', 'snowShader')
+            addShader('camGame', 'bloom_new')
+            addShader('camHUD', 'bloom_new')
+            setShaderFloat('gradientShader', 'applyY', 9999999)
+            setShaderFloat('fogShader', 'applyY', 9999999)
+            setShaderBool('snowShader2', 'pixely', true)
+            setShaderFloat('snowShader2', 'LAYERS', 7)
+            setShaderFloatArray('snowShader2', 'snowMeltRect', {1000, 1430, 1700, 70})
+
+            setVar('snowSpeed', 1.3)
+        end
+
+        cancelTween('camAngleTween')
+        setProperty('camGame.angle', 0)
+
+        setProperty('PILLARS.visible', true)
+        setProperty('boyfriend.alpha', 0.00001)
+    end
+end
+
+function pixelPart()
+    addShader('camHUD', 'pixel')
+    for x, cam in pairs({'camCharacters', 'camForeground'}) do
+        removeShader(cam, 'pixel')
+    end
 end
 
 function addShader(cam, shaderN)

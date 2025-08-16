@@ -16,7 +16,7 @@ local function getCamPos(char)
     if char == 'gf' then _char = 'girlfriend' end
     if char == 'dad' then _char = 'opponent' end
 
-    local bro = getProperty(char..'.cameraPosition[1]')
+    local bro = getProperty(char..'.cameraPosition[0]')
     return {
         x = (getMidpointX(char) + (char == 'boyfriend' and -100 or (char == 'dad' and 150 or 0))) + getProperty(char..'.cameraPosition[0]') + getProperty(_char..'CameraOffset[0]'),
         y = (getMidpointY(char) - ((char == 'boyfriend' or char == 'dad') and 100 or 0)) + getProperty(char..'.cameraPosition[1]') + getProperty(_char..'CameraOffset[1]')

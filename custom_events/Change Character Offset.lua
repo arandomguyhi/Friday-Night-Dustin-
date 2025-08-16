@@ -19,7 +19,7 @@ function onEvent(name, value1, value2)
         if char == '1' then char = 'boyfriend' end
         if char == '2' then char = 'girlfriend' end
 
-        if params1[1] then
+        if params1[1] == 'true' then
             changingValue = true
 
             runTimer('changingTimer'..params1[2], ((crochet/4)/1000) * params2[1])

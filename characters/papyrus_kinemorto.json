@@ -1,0 +1,95 @@
+{
+	"animations": [
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": true,
+			"name": "idle"
+		},
+		{
+			"offsets": [342, 77],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "left"
+		},
+		{
+			"offsets": [119, -121],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "down"
+		},
+		{
+			"offsets": [227, 320],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "up"
+		},
+		{
+			"offsets": [-14, 46],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "right"
+		},
+		{
+			"offsets": [-2, -1],
+			"indices": [],
+			"fps": 24,
+			"anim": "intro",
+			"loop": false,
+			"name": "voiceline1"
+		},
+		{
+			"offsets": [139, 1],
+			"indices": [],
+			"fps": 24,
+			"anim": "intro2",
+			"loop": false,
+			"name": "voiceline2"
+		},
+		{
+			"offsets": [-3, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "stoopidDeath",
+			"loop": false,
+			"name": "voiceline3"
+		},
+		{
+			"offsets": [-6, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "stoopidDeath2",
+			"loop": false,
+			"name": "voiceline4"
+		},
+		{
+			"offsets": [250, 247],
+			"indices": [],
+			"fps": 24,
+			"anim": "stoopidDeath3",
+			"loop": false,
+			"name": "voiceline5"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/kinemorto/papyrus/1, characters/kinemorto/papyrus/2, characters/kinemorto/papyrus/3, characters/kinemorto/papyrus/4, characters/kinemorto/papyrus/5, characters/kinemorto/papyrus/6",
+	"position": [0, -50],
+	"healthicon": "kinemorto-paps",
+	"flip_x": false,
+	"healthbar_colors": [171, 51, 73],
+	"camera_position": [-120, -20],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

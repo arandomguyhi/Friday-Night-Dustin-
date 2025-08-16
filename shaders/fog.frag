@@ -41,7 +41,7 @@ float noise(vec2 st) {
 float fractal_brownian_motion(vec2 coord) {
     float value = 0.0;
     float scale = 0.5;
-    for (int i = 0; i < float(OCTAVES); i++) {
+    for (int i = 0; i < OCTAVES; i++) {
         value += noise(coord) * scale;
         coord *= 2.0;
         scale *= 0.5;

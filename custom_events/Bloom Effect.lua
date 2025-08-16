@@ -15,8 +15,9 @@ end
 setVar('curbloom', 1)
 
 function onEvent(name, value1, value2)
-    local params1, params2 = stringSplit(value1, ','), stringSplit(value2, ',')
     if name == "Bloom Effect" then
+        local params1, params2 = stringSplit(value1, ','), stringSplit(value2, ',')
+
         if params1[1] == 'false' then
             setBloom(params1[2])
         else
